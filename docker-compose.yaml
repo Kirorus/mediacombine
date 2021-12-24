@@ -1,2 +1,15 @@
-version: "3"
-
+version: '3'
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro # host localtime
+      - /var/run/docker.sock:/var/run/docker.sock:ro # docker socket for local docker integration
+      - ./traefik/settings/traefik.yaml:/traefik.yaml:ro # traefik settings in current directory
+      - ./traefik/cert/acme.json:/acme.json # folder to store certs
+      - ./traefik/hosts/:/hosts/:ro
