@@ -4,13 +4,13 @@ services:
     image: linuxserver/sonarr:latest
     container_name: sonarr 
     restart: unless-stopped
-    environment:
-      - TZ=Europe/Moscow # Specify a timezone to use
-      - PUID=1000 # User ID to run as
-      - PGID=1000 # Group ID to run as
-    volumes:
-      - ${DATA_DIR}:/data # Location of all your media
-      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
+    #environment:
+    #  - TZ=Europe/Moscow # Specify a timezone to use
+    #  - PUID=1000 # User ID to run as
+    #  - PGID=1000 # Group ID to run as
+    #volumes:
+    #  - ${DATA_DIR}:/data # Location of all your media
+    #  - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
     ports:
       - 8989:8989/tcp # Web UI
     labels:
