@@ -20,6 +20,7 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
+    restart: always
     environment:
       - TZ=${TZ} # Specify a timezone to use
       - PUID=${PUID} # User ID to run as
@@ -29,4 +30,18 @@ services:
       - ${CONFIG_DIR}/radarr:/config # Contains all relevant configuration files.
     ports:
       - 7878:7878
-    restart: unless-stopped
+    
+  
+  ### JACKETT
+  jackett:
+    image: lscr.io/linuxserver/jackett
+    container_name: jackett
+    restart: always
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - AUTO_UPDATE=true
+    volumes:
+      - ${CONFIG_DIR}/jackett:/config
+      - ${MEDIA_DATA_DIR}:/data

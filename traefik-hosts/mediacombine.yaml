@@ -20,6 +20,15 @@ http:
       tls:
         certResolver: production
 
+    # JACKETT
+    router-mediacombine-jackett: #change router name
+      entryPoints:
+      - web
+      - websecure
+      service: service-mediacombine-jackett #change service name
+      rule: "Host(`jackett.mediacombine.kiroru.ru`)"
+      tls:
+        certResolver: production
 
   services:
     # SONARR
@@ -34,4 +43,11 @@ http:
       loadBalancer:
         servers:
         - url: "http://192.168.1.52:7878" #change ip:port
+        passHostHeader: true
+
+    # JACKETT
+    service-mediacombine-jackett: #change service name
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.52:9117" #change ip:port
         passHostHeader: true
