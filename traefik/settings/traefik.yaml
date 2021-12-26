@@ -36,11 +36,11 @@ entryPoints:
   web:
     address: ":80"
     # ---- Redirect to HTTPS
-    http:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https
+#    http:
+#      redirections:
+#        entryPoint:
+#          to: websecure
+#          scheme: https
     # ----
 
   websecure:
