@@ -25,9 +25,8 @@ services:
       - PUID=${PUID} # User ID to run as
       - PGID=${GUID} # Group ID to run as
     volumes:
-      - /path/to/data:/config
-      - /path/to/movies:/movies #optional
-      - /path/to/downloadclient-downloads:/downloads #optional
+      - ${MEDIA_DATA_DIR}:/data # Location of all your media
+      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
     ports:
       - 7878:7878
     restart: unless-stopped
