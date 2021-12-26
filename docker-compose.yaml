@@ -14,9 +14,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro # host localtime
       - /var/run/docker.sock:/var/run/docker.sock:ro # docker socket for local docker integration
-      - ./settings/traefik.yaml:/traefik.yaml:ro # traefik settings in current directory
-      - ./cert/acme.json:/acme.json # folder to store certs
-      - ./hosts/:/hosts/:ro
+      - ./traefik/settings/traefik.yaml:/traefik.yaml:ro # traefik settings in current directory
+      - ./traefik/cert/acme.json:/acme.json # folder to store certs
+      - ./traefik/hosts/:/hosts/:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=websecure"
