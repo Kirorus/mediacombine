@@ -21,9 +21,9 @@ services:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+      - TZ=${TZ} # Specify a timezone to use
+      - PUID=${PUID} # User ID to run as
+      - PGID=${GUID} # Group ID to run as
     volumes:
       - /path/to/data:/config
       - /path/to/movies:/movies #optional
