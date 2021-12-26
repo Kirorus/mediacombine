@@ -1,50 +1,16 @@
 version: '3'
 services:
-
-  traefik:
-    image: traefik:v2.5
-#    command: --api.insecure=true --providers.docker # setup in traefig config
-    container_name: traefik
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /etc/localtime:/etc/localtime:ro # host localtime
-      - /var/run/docker.sock:/var/run/docker.sock:ro # docker socket for local docker integration
-      - ./traefik/settings/traefik.yaml:/traefik.yaml:ro # traefik settings in current directory
-      - ./traefik/cert/acme.json:/acme.json # folder to store certs
-      - ./traefik/hosts/:/hosts/:ro
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.entrypoints=websecure"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.mediacombine.kiroru.ru`)"
-      - "traefik.http.routers.traefik.tls=true"
-      - "traefik.http.routers.traefik.tls.certresolver=production"
-      - "traefik.http.routers.traefik.service=api@internal"
-#      - "traefik.http.middlewares.traefik-auth.basicauth.users=kiroru:$$apr1$$WA9b2jex$$LkGDlGw4y5RVWn2DIiWQO0"
-#      - "traefik.http.routers.traefik.middlewares=traefik-auth"
-
-
   sonarr:
     image: linuxserver/sonarr:latest
     container_name: sonarr 
     restart: unless-stopped
-    #environment:
-    #  - TZ=Europe/Moscow # Specify a timezone to use
-    #  - PUID=1000 # User ID to run as
-    #  - PGID=1000 # Group ID to run as
-    #volumes:
-    #  - ${DATA_DIR}:/data # Location of all your media
-    #  - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
+    environment:
+      - TZ=Europe/Moscow # Specify a timezone to use
+      - PUID=1000 # User ID to run as
+      - PGID=1000 # Group ID to run as
+    volumes:
+      - ${MEDIA_DATA_DIR}:/data # Location of all your media
+      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
     ports:
       - 8989:8989/tcp # Web UI
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.entrypoints=web, websecure"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.mediacombine.kiroru.ru`)"
-      - "traefik.http.routers.sonarr.tls=true"
-      - "traefik.http.routers.sonarr.tls.certresolver=production"
-      - "traefik.http.routers.sonarr.service=api@internal"
+
