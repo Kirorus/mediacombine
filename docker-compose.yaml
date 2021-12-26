@@ -12,7 +12,7 @@ services:
       - PGID=${GUID} # Group ID to run as
     volumes:
       - ${MEDIA_DATA_DIR}:/data # Location of all your media
-      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
+      - ${CONFIG_DIR}/sonarr:/config # Contains all relevant configuration files.
     ports:
       - 8989:8989/tcp # Web UI
 
@@ -26,7 +26,7 @@ services:
       - PGID=${GUID} # Group ID to run as
     volumes:
       - ${MEDIA_DATA_DIR}:/data # Location of all your media
-      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
+      - ${CONFIG_DIR}/radarr:/config # Contains all relevant configuration files.
     ports:
       - 7878:7878
     restart: unless-stopped
