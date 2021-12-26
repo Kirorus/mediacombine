@@ -1,0 +1,37 @@
+http:
+  routers:
+    # SONARR
+    router-mediacombine-sonarr: #change router name
+      entryPoints:
+      - web
+      - websecure
+      service: service-mediacombine-sonarr #change service name
+      rule: "Host(`sonarr.mediacombine.kiroru.ru`)"
+      tls:
+        certResolver: production
+
+    # SONARR
+    router-mediacombine-radarr: #change router name
+      entryPoints:
+      - web
+      - websecure
+      service: service-mediacombine-radarr #change service name
+      rule: "Host(`radarr.mediacombine.kiroru.ru`)"
+      tls:
+        certResolver: production
+
+
+  services:
+    # SONARR
+    service-mediacombine-sonarr: #change service name
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.52:8989" #change ip:port
+        passHostHeader: true
+
+    # RADARR
+    service-mediacombine-radarr: #change service name
+      loadBalancer:
+        servers:
+        - url: "http://192.168.1.52:7878" #change ip:port
+        passHostHeader: true
