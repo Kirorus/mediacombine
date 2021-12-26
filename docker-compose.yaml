@@ -18,7 +18,7 @@ services:
 
   ### RADARR
   radarr:
-    image: linuxserver/radarr:latest
+    image: lscr.io/linuxserver/radarr
     container_name: radarr
     restart: always
     environment:
