@@ -1,32 +1,17 @@
-version: '3'
+---
+version: "2.1"
 services:
-
-  ### SONARR
-  sonarr:
-    image: linuxserver/sonarr:latest
-    container_name: sonarr 
-    restart: always
-    environment:
-      - TZ=${TZ} # Specify a timezone to use
-      - PUID=${PUID} # User ID to run as
-      - PGID=${GUID} # Group ID to run as
-    volumes:
-      - ${MEDIA_DATA_DIR}:/data # Location of all your media
-      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
-    ports:
-      - 8989:8989/tcp # Web UI
-
-  ### RADARR
   radarr:
     image: lscr.io/linuxserver/radarr
     container_name: radarr
-    restart: always
     environment:
-      - TZ=${TZ} # Specify a timezone to use
-      - PUID=${PUID} # User ID to run as
-      - PGID=${GUID} # Group ID to run as
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
     volumes:
-      - ${MEDIA_DATA_DIR}:/data # Location of all your media
-      - ${CONFIG_DIR}:/config # Contains all relevant configuration files.
+      - /path/to/data:/config
+      - /path/to/movies:/movies #optional
+      - /path/to/downloadclient-downloads:/downloads #optional
     ports:
-      - 7878:7878/tcp # Web UI
+      - 7878:7878
+    restart: unless-stopped
