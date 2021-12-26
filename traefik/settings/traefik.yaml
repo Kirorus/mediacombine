@@ -24,7 +24,7 @@ global:
 # ---
 api:
   dashboard: true  # true by default
-  insecure: false  # Don't do this in production!
+  insecure: true  # Don't do this in production!
 
 
 
