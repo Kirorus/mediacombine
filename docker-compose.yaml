@@ -9,7 +9,7 @@ services:
     environment:
       - TZ=${TZ} # Specify a timezone to use
       - PUID=${PUID} # User ID to run as
-      - PGID=${GUID} # Group ID to run as
+      - PGID=${PGID} # Group ID to run as
     volumes:
       - ${MEDIA_DATA_DIR}:/data # Location of all your media
       - ${CONFIG_DIR}/sonarr:/config # Contains all relevant configuration files.
@@ -24,7 +24,7 @@ services:
     environment:
       - TZ=${TZ} # Specify a timezone to use
       - PUID=${PUID} # User ID to run as
-      - PGID=${GUID} # Group ID to run as
+      - PGID=${PGID} # Group ID to run as
     volumes:
       - ${MEDIA_DATA_DIR}:/data # Location of all your media
       - ${CONFIG_DIR}/radarr:/config # Contains all relevant configuration files.
